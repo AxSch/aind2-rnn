@@ -12,12 +12,23 @@ def window_transform_series(series, window_size):
     # containers for input/output pairs
     X = []
     y = []
-
+    
+    io_seq_len = len(series) - window_size
+    for i in range(0, io_seq_len):
+        X.append(series[i: i + window_size])
+        y.append(series[i + window_size])
     # reshape each 
     X = np.asarray(X)
     X.shape = (np.shape(X)[0:2])
     y = np.asarray(y)
     y.shape = (len(y),1)
+    
+    # print out input/output pairs --> here input = X, corresponding output = y
+    print ('--- the input X will look like ----')
+    print (X)
+
+    print ('--- the associated output y will look like ----')
+    print (y)
 
     return X,y
 
